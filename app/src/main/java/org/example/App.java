@@ -1,5 +1,8 @@
 package org.example;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class App {
 
@@ -18,9 +21,9 @@ public class App {
 
     if (board.gameOver) {
       System.out.println(board.endMessage);
-      
+
       if (input.promptPlayAgain()) {
-      board = new Board();
+        board.reset();
       }
       else {
         break;
@@ -29,5 +32,15 @@ public class App {
     }
   }
   scanner.close();
+
+  try (FileOutputStream fos = new FileOutputStream("output.txt")) {
+            String scores = board.scoreBoard();
+            byte[] dataBytes = scores.getBytes();
+            fos.write(dataBytes);
+            System.out.println("Data successfully written to the file.");
+        }
+        catch (IOException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
 }
 }

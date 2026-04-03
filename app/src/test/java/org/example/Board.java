@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//modified for testing
 public class Board {
 
     public boolean gameOver;
     public String endMessage;
 
     private boolean turn;
-    private final char[] emptyBoard =  { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-    private char[] board = emptyBoard.clone();
+    public final char[] emptyBoard =  { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+    public char[] board = emptyBoard.clone();
 
      private ArrayList<Integer> xPositions = new ArrayList<Integer>();
      private ArrayList<Integer> oPositions = new ArrayList<Integer>();
@@ -71,7 +72,7 @@ public class Board {
         printBoard();
     }
 
-    private String checkWinner() {
+    public String checkWinner() {
         gameOver = true;
         for (List l : winning) {
             if (xPositions.containsAll(l)) {
@@ -107,14 +108,13 @@ public class Board {
         gameOver = false;
         xPositions = new ArrayList<Integer>();
         oPositions = new ArrayList<Integer>();
-        printBoard();
     }
 
     public String scoreBoard() {
         String out = "The current log is: \n";
         out += "\nPlayer X Wins: " + playerXWins;
         out += "\nPlayer O Wins: " + playerOWins;
-        out += "\nTies:          " + ties + "\n";
+        out += "\nTies:          " + ties;
         return out;
     }
 }
