@@ -9,6 +9,8 @@ public class Board {
     public boolean gameOver;
     public String endMessage;
 
+    //true: x
+    //false: o
     private boolean turn;
     private final char[] emptyBoard =  { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
     private char[] board = emptyBoard.clone();
