@@ -3,10 +3,12 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 class BoardTest {
     @Test
     public void winTest1() {
-        Board board = new Board();
+        TestBoard board = new TestBoard();
         board.move(1);
         board.move(2);
         board.move(5);
@@ -17,7 +19,7 @@ class BoardTest {
 
     @Test
     public void winTest2() {
-        Board board = new Board();
+        TestBoard board = new TestBoard();
         board.move(2);
         board.move(1);
         board.move(3);
@@ -30,9 +32,17 @@ class BoardTest {
 
     @Test
     public void resetTest() {
-        Board b = new Board();
+        TestBoard b = new TestBoard();
         b.move(2);
         b.reset();
-        assertEquals(b.board[1], '2');
+        assertEquals(b.getBoard()[1], '2');
     }
+
+    @Test
+    public void getBoardTest() {
+        TestBoard b = new TestBoard();
+       char[] test = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+       assertEquals(true, Arrays.equals(test, b.getBoard()));
+    }
+
 }

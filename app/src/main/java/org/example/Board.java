@@ -8,20 +8,21 @@ public class Board {
 
     public boolean gameOver;
     public String endMessage;
+    public int move = 1;
 
-    //true: x
-    //false: o
-    private boolean turn;
-    private final char[] emptyBoard =  { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+    // true: x
+    // false: o
+    public boolean turn;
+    private final char[] emptyBoard = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
     private char[] board = emptyBoard.clone();
 
-     private ArrayList<Integer> xPositions = new ArrayList<Integer>();
-     private ArrayList<Integer> oPositions = new ArrayList<Integer>();
-     private List<List> winning = new ArrayList<List>();
+    private ArrayList<Integer> xPositions = new ArrayList<Integer>();
+    private ArrayList<Integer> oPositions = new ArrayList<Integer>();
+    private List<List> winning = new ArrayList<List>();
 
-     private int playerXWins = 0;
-     private int playerOWins = 0;
-     private int ties = 0;
+    private int playerXWins = 0;
+    private int playerOWins = 0;
+    private int ties = 0;
 
     public Board() {
         gameOver = false;
@@ -59,17 +60,19 @@ public class Board {
             if (turn) {
                 player = 'X';
                 xPositions.add(position);
-            }
-            else {
+            } else {
                 player = 'O';
                 oPositions.add(position);
             }
             board[position - 1] = player;
             turn = !turn;
+            move++;
         }
 
         endMessage = checkWinner();
-        if (gameOver) {endMessage += scoreBoard();}
+        if (gameOver) {
+            endMessage += scoreBoard();
+        }
         printBoard();
     }
 
@@ -79,18 +82,19 @@ public class Board {
             if (xPositions.containsAll(l)) {
                 playerXWins++;
                 turn = false;
-                return "Player X wins! ";
-            }
-            else if (oPositions.containsAll(l)) {
+                return endMessage = "Player X wins! ";
+            } else if (oPositions.containsAll(l)) {
                 playerOWins++;
                 turn = true;
                 return "Player O wins! ";
             }
-            else if (xPositions.size() + oPositions.size() == 9) {
-                ties++;
-                return "Tie! ";
-            }
         }
+
+        if (xPositions.size() + oPositions.size() == 9) {
+            ties++;
+            return "Tie! ";
+        }
+
         gameOver = false;
         return "n";
     }
@@ -118,5 +122,10 @@ public class Board {
         out += "\nPlayer O Wins: " + playerOWins;
         out += "\nTies:          " + ties + "\n";
         return out;
+    }
+
+    // for the computer player
+    public char[] getBoard() {
+        return board.clone();
     }
 }
