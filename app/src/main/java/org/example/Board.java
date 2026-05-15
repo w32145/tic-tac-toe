@@ -10,9 +10,9 @@ public class Board {
     public String endMessage;
     public int move = 1;
 
-    // true: x
-    // false: o
-    public boolean turn;
+    public char turn;
+    public char cpuTurn;
+
     private final char[] emptyBoard = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
     private char[] board = emptyBoard.clone();
 
@@ -26,7 +26,7 @@ public class Board {
 
     public Board() {
         gameOver = false;
-        turn = true;
+        turn = 'X';
         printBoard();
 
         List topRow = Arrays.asList(1, 2, 3);
@@ -57,7 +57,7 @@ public class Board {
             System.out.println("Spot already taken");
         } else {
             char player;
-            if (turn) {
+            if (turn == 'X') {
                 player = 'X';
                 xPositions.add(position);
             } else {
@@ -65,7 +65,7 @@ public class Board {
                 oPositions.add(position);
             }
             board[position - 1] = player;
-            turn = !turn;
+            turn = swap(turn);
             move++;
         }
 
@@ -81,11 +81,11 @@ public class Board {
         for (List l : winning) {
             if (xPositions.containsAll(l)) {
                 playerXWins++;
-                turn = false;
+                turn = 'O';
                 return endMessage = "Player X wins! ";
             } else if (oPositions.containsAll(l)) {
                 playerOWins++;
-                turn = true;
+                turn = 'X';
                 return "Player O wins! ";
             }
         }
@@ -127,5 +127,13 @@ public class Board {
     // for the computer player
     public char[] getBoard() {
         return board.clone();
+    }
+
+    public char swap(char c) {
+        if (c == 'X') {
+            return 'O';
+        } else {
+            return 'X';
+        }
     }
 }

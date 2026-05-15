@@ -1,5 +1,5 @@
 The current log is: 
 
-Player X Wins: 0
-Player O Wins: 1
+Player X Wins: 2
+Player O Wins: 0
 Ties:          0

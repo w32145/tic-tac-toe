@@ -3,6 +3,13 @@ import java.util.Scanner;
 
 public class App {
 
+      public char swap(char c) {
+        if (c == 'X') {
+            return 'O';
+        } else {
+            return 'X';
+        }
+    }
   public static void main(String[] args) {
 
    System.out.print("Welcome to Tic Tac Toe\n");
@@ -12,9 +19,7 @@ public class App {
     FileOutput output = new FileOutput("output.txt");
 
     Boolean pve = false;
-    Boolean computerTurn = false; // keeps track of the computer's turn
-    // true: x
-    // false: o
+    char computerTurn = 'O'; // keeps track of the computer's turn
 
     switch (input.promptPVP()) {
       case 1:
@@ -25,18 +30,19 @@ public class App {
       case 2:
       //player vs computer
       pve = true;
-      computerTurn = false;
+      computerTurn = 'O';
       break;
 
       case 3:
       //computer vs player
       pve = true;
-      computerTurn = true;
+      computerTurn = 'X';
       break;
     }
     
     computerPlayer cpu = new computerPlayer(computerTurn);
     Board board = new Board();
+    board.cpuTurn = computerTurn;  
 
   while (true) {
   
@@ -59,7 +65,7 @@ public class App {
 
       if (input.promptPlayAgain()) {
         board.reset();
-      }
+      } 
       else {
         break;
       }

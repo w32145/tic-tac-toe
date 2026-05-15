@@ -7,8 +7,16 @@ public class computerPlayer {
     private final char[] emptyBoard = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
     private char playerSymbol;
 
-    public computerPlayer(Boolean computerTurn) {
-        playerSymbol = computerTurn ? 'O' : 'X';
+        public char swap(char c) {
+        if (c == 'X') {
+            return 'O';
+        } else {
+            return 'X';
+        }
+    }
+
+    public computerPlayer(char computerTurn) {
+        playerSymbol = swap(computerTurn);
     }
 
     // returns number between 1 and 9
